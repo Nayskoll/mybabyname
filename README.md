@@ -39,14 +39,10 @@ streamlit run app.py
 
 ### How to use the UI:
 Select one or multiple reference names
-
-Choose gender (M or F)
-
-Click "Generate Suggestions" to see similar baby names
-
-Add names to your favorites to easily find them later
-
-Share your favorite results with integrated social buttons
+- Choose gender (M or F)
+- Click "Generate Suggestions" to see similar baby names
+- Add names to your favorites to easily find them later
+- Share your favorite results with integrated social buttons
 
 ## 📁 Expected Data Structure
 The CSV file `prenoms_embed_dedup.csv` should contain at least the following columns:
