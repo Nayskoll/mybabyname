@@ -27,7 +27,7 @@ cd my-baby-name-generator
 
 ```bash
 pip install -r requirements.txt
-
+```
 3. Prepare the CSV file prenoms_embed_dedup.csv containing names, embeddings, gender, popularity, origin, meaning, etc.
 
 ## ⚙️ Usage
@@ -35,8 +35,9 @@ Run the Streamlit app:
 
 ```bash
 streamlit run app.py
+```
 
-##How to use the UI:
+### How to use the UI:
 Select one or multiple reference names
 
 Choose gender (M or F)
@@ -48,26 +49,28 @@ Add names to your favorites to easily find them later
 Share your favorite results with integrated social buttons
 
 ## 📁 Expected Data Structure
-The CSV file prenoms_embed_dedup.csv should contain at least these columns:
+The CSV file `prenoms_embed_dedup.csv` should contain at least the following columns:
 
-Column	Description
-name	Baby name (string)
-embedding	Embedding vector stored as a list/array
-gender	Gender (M or F)
-total_popularity	Total number of births
-origin	Name origin
-meaning	Name meaning
+| Column           | Description                             |
+|------------------|---------------------------------------|
+| `name`           | Baby name (string)                     |
+| `embedding`      | Embedding vector stored as a list/array |
+| `gender`         | Gender (M or F)                       |
+| `total_popularity`| Total number of births                |
+| `origin`         | Name origin                          |
+| `meaning`        | Name meaning                        |
 
-🎨 Styling
+
+## 🎨 Styling
 Card styles are defined via CSS injected using st.markdown. Modify the <style> section in the app code to customize colors, shadows, borders, etc.
 
-🧠 How it works
+## 🧠 How it works
 Uses name embeddings and cosine similarity for smart matching
 
 Averages embeddings of selected names as a reference vector
 
 Returns the most similar and popular names sorted accordingly
 
-🔗 Social Sharing
+## 🔗 Social Sharing
 Share your name lists on WhatsApp, Facebook Messenger, X (formerly Twitter), and Facebook using dynamically generated URLs and sleek icons.
 
