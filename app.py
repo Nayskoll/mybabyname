@@ -216,7 +216,7 @@ import urllib.parse
 
 # Message et URL à partager
 message = "Découvre ma liste de prénoms et leur signification sur mybabyname.app 🎈"
-url = "https://mybabyname.app"
+url = "https://mybabyname.streamlit.app"
 full_message = f"{message} {url}"
 encoded_message = urllib.parse.quote(full_message)
 encoded_url = urllib.parse.quote(url)
