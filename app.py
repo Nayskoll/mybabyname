@@ -45,37 +45,38 @@ st.write("Découvrez des prénoms similaires à ceux que vous aimez, avec des in
 st.markdown("""
     <style>
     .styled-card {
-        background: linear-gradient(135deg, #f9f9f9 60%, #e3e6f3 100%);
-        padding: 18px 20px 18px 20px;
+        background: var(--background-color);
+        color: var(--text-color);
+        padding: 18px 20px;
         border-radius: 18px;
-        box-shadow: 0 2px 12px rgba(80,80,120,0.08);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.05);
         margin-bottom: 18px;
         min-height: 230px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border: 1.5px solid #ececf2;
+        border: 1.5px solid var(--secondary-background-color);
         transition: box-shadow 0.2s;
     }
     .styled-card:hover {
-        box-shadow: 0 4px 18px rgba(80,80,120,0.16);
-        border: 1.5px solid #b3b6d4;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        border: 1.5px solid var(--primary-color);
     }
     .styled-card h3 {
-        color: #7e3af2;
+        color: var(--primary-color);
         margin-bottom: 0.4rem;
         font-size: 1.3rem;
         font-weight: 700;
     }
     .progress-container {
-        background-color: #ececf2;
+        background-color: var(--secondary-background-color);
         border-radius: 8px;
         height: 8px;
         width: 100%;
         margin-bottom: 4px;
     }
     .progress-bar {
-        background: linear-gradient(90deg, #7e3af2 60%, #a5b4fc 100%);
+        background: linear-gradient(90deg, var(--primary-color) 60%, #a5b4fc 100%);
         height: 100%;
         border-radius: 8px;
     }
@@ -85,9 +86,6 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
-
-
 
 
 with st.form("name_form"):
@@ -160,23 +158,23 @@ if st.session_state.favorites:
     rows = [favs_df.iloc[i:i + cols_per_row] for i in range(0, len(favs_df), cols_per_row)]
 
     st.markdown("""
-    <style>
-    .delete-x {
-        position: absolute;
-        top: 8px;
-        right: 12px;
-        z-index: 10;
-        background: transparent;
-        border: none;
-        color: #999;
-        font-size: 1.3em;
-        cursor: pointer;
-        padding: 0;
-    }
-    .fav-card-container {
-        position: relative;
-    }
-    </style>
+        <style>
+        .delete-x {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            z-index: 10;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.3em;
+            cursor: pointer;
+            padding: 0;
+        }
+        .fav-card-container {
+            position: relative;
+        }
+        </style>
     """, unsafe_allow_html=True)
 
     for row in rows:
@@ -193,8 +191,8 @@ if st.session_state.favorites:
                     st.session_state.favorites.remove(fav["name"])
                     st.rerun()
                 st.markdown(f"""
-                    <div class="styled-card" style="border: 2px solid {border_color}; background: {bg_color}; margin-top:0px;">
-                        <h3 style="color:{title_color};">{gender_icon} {fav['name']}</h3>
+                    <div class="styled-card" style="margin-top:0px;">
+                        <h3>{gender_icon} {fav['name']}</h3
                         <p><strong>🌍 Origine :</strong> {fav['origin']}</p>
                         <p><strong>💬 Signification :</strong> {fav['meaning']}</p>
                         <p><strong>🔥 Popularité :</strong> {int(fav['total_popularity'])} naissances</p>
