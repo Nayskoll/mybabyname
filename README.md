@@ -27,7 +27,7 @@ cd my-baby-name-generator
 
 ```bash
 pip install -r requirements.txt
-
+```
 3. Prepare the CSV file prenoms_embed_dedup.csv containing names, embeddings, gender, popularity, origin, meaning, etc.
 
 ## ⚙️ Usage
