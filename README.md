@@ -22,12 +22,12 @@ An interactive web app to discover baby names similar to the ones you like, with
 ```bash
 git clone https://github.com/your-username/my-baby-name-generator.git
 cd my-baby-name-generator
-
+```
 2. Install dependencies (preferably in a virtual environment)
 
 ```bash
 pip install -r requirements.txt
-```
+
 3. Prepare the CSV file prenoms_embed_dedup.csv containing names, embeddings, gender, popularity, origin, meaning, etc.
 
 ## ⚙️ Usage
