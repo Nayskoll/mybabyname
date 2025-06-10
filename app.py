@@ -12,6 +12,7 @@ st.set_page_config(page_title="👶 My Baby Name Generator", layout="wide")
 df = pd.read_csv("prenoms_embed_dedup.csv", encoding="utf-8")
 df["name"] = df["name"].str.capitalize().str.strip()
 df["embedding"] = df["embedding"].apply(ast.literal_eval)
+df["embedding_origin"] = df["embedding_origin"].apply(ast.literal_eval)
 df["gender"] = df["gender"].str.upper().str.strip()
 df["total_popularity"] = pd.to_numeric(df["total_popularity"], errors="coerce")
 
@@ -21,21 +22,34 @@ all_names = sorted(df["name"].unique())
 if "favorites" not in st.session_state:
     st.session_state.favorites = []
 
-def suggest_names(input_names, gender, top_n=30):
+
+def suggest_names(input_names, gender, top_n=30, alpha=0.8):
+    beta = 1 - alpha  # pondération pour l'origine
+
     df_gender = df[df["gender"] == gender]
     if not input_names:
         return df_gender.sort_values(by="total_popularity", ascending=False).head(top_n)
-    
+
+    # Embedding prénom
     input_vectors = np.vstack(df[df["name"].isin(input_names)]["embedding"].values)
     avg_vector = np.mean(input_vectors, axis=0).reshape(1, -1)
     all_embeddings = np.vstack(df_gender["embedding"].values)
-    similarities = cosine_similarity(avg_vector, all_embeddings)[0]
-    
+    sim_name = cosine_similarity(avg_vector, all_embeddings)[0]
+
+    # Embedding origine
+    input_origin_vectors = np.vstack(df[df["name"].isin(input_names)]["embedding_origin"].values)
+    avg_origin_vector = np.mean(input_origin_vectors, axis=0).reshape(1, -1)
+    all_origin_embeddings = np.vstack(df_gender["embedding_origin"].values)
+    sim_origin = cosine_similarity(avg_origin_vector, all_origin_embeddings)[0]
+
+    # Similarité pondérée
+    similarity = alpha * sim_name + beta * sim_origin
+
     df_gender = df_gender.copy()
-    df_gender["similarity"] = similarities
+    df_gender["similarity"] = similarity
     suggestions = df_gender[~df_gender["name"].isin(input_names)]
     suggestions = suggestions.sort_values(by=["similarity", "total_popularity"], ascending=[False, False])
-    
+
     return suggestions.head(top_n)
 
 # UI améliorée
