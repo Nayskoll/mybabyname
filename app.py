@@ -58,6 +58,12 @@ st.write("Découvrez des prénoms similaires à ceux que vous aimez, avec des in
 
 st.markdown("""
     <style>
+    :root {
+        --primary-color: #a855f7; /* violet */
+        --secondary-background-color: #f3f4f6; /* gris clair */
+        --text-color: #111827; /* presque noir */
+        --background-color: #ffffff; /* blanc */
+    }
     .styled-card {
         background: var(--background-color);
         color: var(--text-color);
